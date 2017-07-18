@@ -1,0 +1,25 @@
+<style>
+
+</style>
+
+<section>
+  <div *ngFor="let player of players" class="layout horizontal">
+    <div>{{player.name}}</div>
+    <material-input *ngIf="player.name != currentPlayer" label="Score" [(ngModel)]="rollResult"></material-input>
+    <div>{{player.score}}</div>
+    <material-fab [hidden]="player.name != currentPlayer"
+                  mini
+                  raised
+                  (trigger)="next()">
+      <glyph icon="navigate_next"></glyph>
+    </material-fab>
+  </div>
+</section>
+
+<section>
+  <material-fab mini
+                raised
+                (trigger)="stop()">
+    <glyph icon="stop"></glyph>
+  </material-fab>
+</section>

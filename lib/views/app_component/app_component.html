@@ -1,0 +1,8 @@
+<h1>Ten Thousand</h1>
+
+<div class="flex layout vertical">
+  <game-setup *ngIf="setUpGame" (gameReady)="gameReady($event)" class="flex layout vertical"></game-setup>
+
+  <game-view *ngIf="!setUpGame" (continueGame)="gameReady($event)" class="flex layout vertical"></game-view>
+</div>
+
