@@ -38,6 +38,7 @@ class Game {
     _players[currentPlayerIndex].myTurn = true;
   }
 
+//  TODO: Fix win logic. Game just goes forever right now. It's basically a player calculator.
   void winCondition() {
     int winVal = scoreToBeat ?? TEN_THOUSAND;
 

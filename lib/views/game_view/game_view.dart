@@ -33,6 +33,7 @@ class GameView {
     });
   }
 
+//  TODO: More intense parsing. This will crash if someone enters an invalid character. Ooo... input?
   void next() {
     _game.game.players[_game.game.currentPlayerIndex].addDiceResult(int.parse(rollResult));
     rollResult = "0";
