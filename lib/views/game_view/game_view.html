@@ -1,18 +1,27 @@
 <style>
-
+  .player-card {
+    width: 50%;
+    border: 1px solid purple;
+    margin-bottom: .5rem;
+    padding: .5rem;
+  }
 </style>
 
 <section>
-  <div *ngFor="let player of players" class="layout horizontal">
-    <div>{{player.name}}</div>
-    <material-input *ngIf="player.name != currentPlayer" label="Score" [(ngModel)]="rollResult"></material-input>
-    <div>{{player.score}}</div>
-    <material-fab [hidden]="player.name != currentPlayer"
-                  mini
-                  raised
-                  (trigger)="next()">
-      <glyph icon="navigate_next"></glyph>
-    </material-fab>
+  <div *ngFor="let player of players" class="layout vertical player-card">
+    <section class="layout horizontal center justified">
+      <div>{{player.name}}</div>
+      <div>{{player.score}}</div>
+      <material-fab [hidden]="player.myTurn == false"
+                    autoFocus
+                    mini
+                    raised
+                    (trigger)="next()">
+        <glyph icon="navigate_next"></glyph>
+      </material-fab>
+    </section>
+
+    <material-input *ngIf="player.name == currentPlayer" label="Score" [(ngModel)]="rollResult"></material-input>
   </div>
 </section>
 

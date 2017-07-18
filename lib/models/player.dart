@@ -4,7 +4,7 @@ class Player {
   int _score = 0;
   int _lastDiceResult;
   bool myTurn;
-  bool finalTurn;
+  bool finalTurn = false;
 
   Player(this.name) {
     reset();
@@ -14,6 +14,7 @@ class Player {
     _score = 0;
     _lastDiceResult = null;
     myTurn = false;
+    finalTurn = false;
   }
 
   void addDiceResult(int value) {

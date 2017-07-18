@@ -19,7 +19,7 @@ class GameView {
   final StreamController<bool> _continueGame = new StreamController<bool>.broadcast();
   @Output() Stream<bool> get continueGame => _continueGame.stream;
 
-  int rollResult = 0;
+  String rollResult = "0";
 
   GameView(LoggerService this._log, GameService this._game) {
     _log.info("$runtimeType()");
@@ -34,8 +34,8 @@ class GameView {
   }
 
   void next() {
-    _game.game.players[_game.game.currentPlayerIndex].addDiceResult(rollResult);
-    rollResult = 0;
+    _game.game.players[_game.game.currentPlayerIndex].addDiceResult(int.parse(rollResult));
+    rollResult = "0";
     _game.game.nextPlayer();
   }
 

@@ -1,6 +1,9 @@
+import '../services/logger_service.dart';
+
 import 'player.dart';
 
 class Game {
+  final LoggerService _log = new LoggerService();
   final List<Player> _players = [];
   static const int TEN_THOUSAND = 10000;
 
@@ -28,7 +31,7 @@ class Game {
       _players[currentPlayerIndex].myTurn = false;
     }
 
-    if (++currentPlayerIndex >= players.length) {
+    if (++currentPlayerIndex == players.length) {
       currentPlayerIndex = 0;
     }
 
