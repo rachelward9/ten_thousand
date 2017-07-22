@@ -12,16 +12,35 @@
     <section class="layout horizontal center justified">
       <div>{{player.name}}</div>
       <div>{{player.score}}</div>
+
       <material-fab [hidden]="player.myTurn == false"
-                    autoFocus
+                    #nextBtn
                     mini
                     raised
-                    (trigger)="next()">
+                    (trigger)="next(scoreForm.value)"
+                    [disabled]="!scoreForm.form.valid">
         <glyph icon="navigate_next"></glyph>
       </material-fab>
     </section>
 
-    <material-input *ngIf="player.name == currentPlayer" label="Score" type="number" [(ngModel)]="rollResult"></material-input>
+    <!--<material-input *ngIf="player.name == currentPlayer"-->
+                    <!--autoFocus-->
+                    <!--type="number"-->
+                    <!--label="Score"-->
+                    <!--[(ngModel)]="rollResult">-->
+    <!--</material-input>-->
+
+    <form (ngSubmit)="next(scoreForm.value)" #scoreForm="ngForm">
+      <material-input *ngIf="player == currentPlayer"
+                      checkPositive
+                      #scoreInput="ngForm"
+                      [ngClass]="controlStateClasses(scoreInput)"
+                      type="number"
+                      [(ngModel)]="rollResult"
+                      ngControl="scoreInput"
+                      (keyup.enter)="next(scoreForm.value)">
+      </material-input>
+    </form>
   </div>
 </section>
 
