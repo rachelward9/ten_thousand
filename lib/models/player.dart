@@ -1,10 +1,11 @@
 class Player {
   final String name;
 
-  int _score = 0;
+  int _score;
   int _lastDiceResult;
+  int bustCount;
   bool myTurn;
-  bool finalTurn = false;
+  bool finalTurn;
 
   Player(this.name) {
     reset();
@@ -13,6 +14,7 @@ class Player {
   void reset() {
     _score = 0;
     _lastDiceResult = null;
+    bustCount = 0;
     myTurn = false;
     finalTurn = false;
   }
@@ -31,6 +33,7 @@ class Player {
 
 //  UI will handle this. If canUndo is false, the button is disabled.
   bool get canUndo => _lastDiceResult != null;
+
 
   @override String toString() => "$name: $_score";
 }

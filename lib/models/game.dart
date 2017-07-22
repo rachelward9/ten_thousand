@@ -9,11 +9,13 @@ class Game {
 
   int currentPlayerIndex;
   int scoreToBeat;
+  int turnsRemaining;
   bool finalTurn;
 
   void newGame() {
     currentPlayerIndex = -1;
     scoreToBeat = null;
+    turnsRemaining = players.length;
     nextPlayer();
   }
 
@@ -26,7 +28,11 @@ class Game {
   }
 
   void nextPlayer() {
-    if (currentPlayerIndex > -1 && !_players[currentPlayerIndex].finalTurn) {
+    if (turnsRemaining == 0) {
+      _log.info("$runtimeType()::nextPlayer() - no turns remaining");
+      return;
+    }
+    if (currentPlayerIndex > -1) {
       winCondition();
       _players[currentPlayerIndex].myTurn = false;
     }
@@ -38,20 +44,25 @@ class Game {
     _players[currentPlayerIndex].myTurn = true;
   }
 
-//  TODO: Fix win logic. Game just goes forever right now. It's basically a player calculator.
   void winCondition() {
     int winVal = scoreToBeat ?? TEN_THOUSAND;
 
     if (_players[currentPlayerIndex].score >= winVal) {
-      scoreToBeat = winVal;
+      scoreToBeat = _players[currentPlayerIndex].score;
+
+      players.forEach((p) {
+        p.finalTurn = true;
+      });
+
       finalTurn = true;
-      print("You're winning! Score to beat is now $scoreToBeat.");
     }
-    else if (!_players[currentPlayerIndex].finalTurn) {
+
+    if (finalTurn == true) {
+      turnsRemaining--;
+    }
+
+    if (!_players[currentPlayerIndex].finalTurn) {
       return;
-    }
-    else {
-      print("${players[currentPlayerIndex].name} loses.");
     }
   }
 

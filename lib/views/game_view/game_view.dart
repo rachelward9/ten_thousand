@@ -40,6 +40,7 @@ class GameView {
     });
   }
 
+//  TODO: Check for final turn, because you can add to the last person's score forever.
   void submitScore() {
     _log.info("$runtimeType()::submitNext() - scoreForm control group");
 
@@ -49,6 +50,11 @@ class GameView {
 
     _gameService.game.players[_gameService.game.currentPlayerIndex].addDiceResult(scoreInput.value.toInt());
     scoreInput.updateValue(null);
+    _gameService.game.nextPlayer();
+  }
+
+  void bust() {
+    _gameService.game.players[_gameService.game.currentPlayerIndex].bustCount++;
     _gameService.game.nextPlayer();
   }
 
