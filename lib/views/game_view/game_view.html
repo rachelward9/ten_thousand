@@ -14,40 +14,29 @@
       <div>{{player.score}}</div>
 
       <material-fab [hidden]="player.myTurn == false"
-                    #nextBtn
                     mini
                     raised
-                    (trigger)="next(scoreForm.value)"
-                    [disabled]="!scoreForm.form.valid">
+                    (trigger)="submitScore()"
+                    [disabled]="!scoreInput.valid || scoreInput.value == null">
         <glyph icon="navigate_next"></glyph>
       </material-fab>
     </section>
 
-    <!--<material-input *ngIf="player.name == currentPlayer"-->
-                    <!--autoFocus-->
-                    <!--type="number"-->
-                    <!--label="Score"-->
-                    <!--[(ngModel)]="rollResult">-->
-    <!--</material-input>-->
-
-    <form (ngSubmit)="next(scoreForm.value)" #scoreForm="ngForm">
       <material-input *ngIf="player == currentPlayer"
-                      checkPositive
-                      #scoreInput="ngForm"
-                      [ngClass]="controlStateClasses(scoreInput)"
                       type="number"
-                      [(ngModel)]="rollResult"
-                      ngControl="scoreInput"
-                      (keyup.enter)="next(scoreForm.value)">
+                      checkNonNegative
+                      keypressUpdate
+                      autoFocus
+                      [ngFormControl]="scoreInput"
+                      (keyup.enter)="submitScore()">
       </material-input>
-    </form>
   </div>
 </section>
 
 <section>
   <material-fab mini
                 raised
-                (trigger)="stop()">
+                (trigger)="endGame()">
     <glyph icon="stop"></glyph>
   </material-fab>
 </section>

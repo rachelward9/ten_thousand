@@ -19,52 +19,40 @@ import '../../models/player.dart';
     ])
 class GameView {
   final LoggerService _log;
-  final GameService _game;
+  final GameService _gameService;
 
   final StreamController<bool> _continueGame = new StreamController<bool>.broadcast();
   @Output() Stream<bool> get continueGame => _continueGame.stream;
 
-  @ViewChild('nextBtn') MaterialFabComponent nextBtn;
+  Control scoreInput = new Control();
 
   num rollResult;
 
-  GameView(LoggerService this._log, GameService this._game) {
+  GameView(LoggerService this._log, GameService this._gameService) {
     _log.info("$runtimeType()");
-    _game.game.newGame();
+    _gameService.game.newGame();
   }
 
-  void stop() {
+  void endGame() {
     _continueGame.add(false);
-    _game.game.players.forEach((Player p) {
+    _gameService.game.players.forEach((Player p) {
       p.reset();
     });
   }
 
-//  TODO: More intense parsing. This will crash if someone enters an invalid character. Ooo... input?
-  void next(Map scoreInput) {
-    _log.info("$runtimeType()::next() - rollResult: $rollResult");
-    _log.info("$runtimeType()::next() - scoreInput: $scoreInput");
+  void submitScore() {
+    _log.info("$runtimeType()::submitNext() - scoreForm control group");
 
-    if (rollResult != null) {
-      _game.game.players[_game.game.currentPlayerIndex].addDiceResult(rollResult.toInt());
-      rollResult = null;
-      _game.game.nextPlayer();
+    if (scoreInput.value == null || !scoreInput.valid) {
+      return;
     }
 
-    nextBtn.focus();
+    _gameService.game.players[_gameService.game.currentPlayerIndex].addDiceResult(scoreInput.value.toInt());
+    scoreInput.updateValue(null);
+    _gameService.game.nextPlayer();
   }
 
-  Player get currentPlayer =>
-      _game.game.players[_game.game.currentPlayerIndex];
+  Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
 
-  List<Player> get players => _game.game.players;
-
-  Map<String, bool> controlStateClasses(NgControl control) => {
-        'ng-dirty': control.dirty ?? false,
-        'ng-pristine': control.pristine ?? false,
-        'ng-touched': control.touched ?? false,
-        'ng-untouched': control.untouched ?? false,
-        'ng-valid': control.valid ?? false,
-        'ng-invalid': control.valid == false
-      };
+  List<Player> get players => _gameService.game.players;
 }
