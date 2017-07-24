@@ -14,7 +14,7 @@ import '../game_view/game_view.dart';
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: const [CORE_DIRECTIVES, materialDirectives, LoginView, GameSetup, GameView],
-  providers: const [FirebaseService, materialProviders, GameService]
+  providers: const [materialProviders, GameService]
 )
 class AppComponent {
   final LoggerService _log;

@@ -46,6 +46,18 @@ class FirebaseService {
     players.add(p);
   }
 
+  Future addPlayer(String name) async {
+    try {
+      Player p = new Player(name);
+      await _fbRefPlayers.push(p.toMap());
+    }
+    catch (error) {
+      print("FirebaseService()::addPlayer() -- $error");
+    }
+  }
+
+//  TODO: Figure out how to access the players' stats and update their scores.
+
   Future signIn() async {
     try {
       await _fbAuth.signInWithPopup(_fbGoogleAuthProvider);

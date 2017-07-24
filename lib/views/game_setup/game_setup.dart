@@ -23,9 +23,8 @@ class GameSetup {
     _log.info("$runtimeType()");
   }
 
-//  TODO: Add logic to prevent adding users with the same name.
   void addPlayer() {
-    gameService.game.addPlayer(name);
+    gameService.addPlayer(name);
     name = "";
   }
 

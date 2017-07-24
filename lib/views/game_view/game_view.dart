@@ -42,7 +42,7 @@ class GameView {
 
 //  TODO: Check for final turn, because you can add to the last person's score forever.
   void submitScore() {
-    _log.info("$runtimeType()::submitNext() - scoreForm control group");
+    _log.info("$runtimeType()::submitScore() - scoreForm control group");
 
     if (scoreInput.value == null || !scoreInput.valid) {
       return;
