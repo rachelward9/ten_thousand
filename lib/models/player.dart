@@ -7,9 +7,20 @@ class Player {
   bool myTurn;
   bool finalTurn;
 
-  Player(this.name) {
+  Player(this.name, [this._score, this._lastDiceResult, this.bustCount, this.myTurn, this.finalTurn]) {
     reset();
   }
+
+  Player.fromMap(Map map) : this(map['name'], map['_score'], map['_lastDiceResult'], map['bustCount'], map['myTurn'], map['finalTurn']);
+
+  Map toMap() => {
+    "name" : name,
+    "_score" : _score,
+    "_lastDiceResult" : _lastDiceResult,
+    "bustCount" : bustCount,
+    "myTurn" : myTurn,
+    "finalTurn" : finalTurn
+  };
 
   void reset() {
     _score = 0;
