@@ -4,20 +4,24 @@ import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
 
+import 'logger_service.dart';
+
 import '../models/player.dart';
 
 
 @Injectable()
 class FirebaseService {
+  final LoggerService _log;
+
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.Auth _fbAuth;
   fb.Database _fbDatabase;
-  fb.DatabaseReference _fbRefPlayers;
+  fb.DatabaseReference _fbRefGameSessions;
   fb.User user;
 
   List<Player> players;
 
-  FirebaseService() {
+  FirebaseService(LoggerService this._log) {
     fb.initializeApp(
         apiKey: "AIzaSyAS7fJVerd-WPWaaJ7ghO8KdDIHzfTXJek",
         authDomain: "ten-thousand-dcc16.firebaseapp.com",
@@ -29,7 +33,7 @@ class FirebaseService {
     _fbAuth = fb.auth();
     _fbAuth.onAuthStateChanged.listen(_authChanged);
     _fbDatabase = fb.database();
-    _fbRefPlayers = _fbDatabase.ref("players");
+    _fbRefGameSessions = _fbDatabase.ref("sessions");
   }
 
   void _authChanged(fb.AuthEvent event) {
@@ -37,7 +41,7 @@ class FirebaseService {
 
     if (user != null) {
       players = [];
-      _fbRefPlayers.onChildAdded.listen(_newPlayer);
+      _fbRefGameSessions.onChildAdded.listen(_newPlayer);
     }
   }
 
@@ -46,13 +50,39 @@ class FirebaseService {
     players.add(p);
   }
 
+//  TODO: stop using push(), so you can use your own keys.
+//  TODO: addPlayer() might not need to exist. We should organize by game sessions instead (multiple sessions -- yay!)
+//  Each game can have a list of players. They should have unique names though.
   Future addPlayer(String name) async {
     try {
       Player p = new Player(name);
-      await _fbRefPlayers.push(p.toMap());
+      await _fbRefGameSessions.push(p.toMap());
     }
     catch (error) {
       print("FirebaseService()::addPlayer() -- $error");
+    }
+  }
+
+  String createSessionRef() => _fbRefGameSessions.push().key;
+
+  void testUpdate(Player p) {
+    var playerRef = _fbRefGameSessions.push().key;
+
+    _log.info("$runtimeType()::testUpdate() -- $playerRef");
+
+    var updates = {};
+//    updates[playerRef] = new Player("Stan", 500, 500, 0, false, false).toMap();
+    updates[playerRef] = p.toMap();
+
+    _fbRefGameSessions.update(updates);
+  }
+
+  Future updatePlayer({String name, int score}) async {
+    try {
+      _fbRefGameSessions.child(name).set({"_score" : score});
+    }
+    catch (error) {
+      print("FBService()::updatePlayer() -- $error}");
     }
   }
 
@@ -70,4 +100,6 @@ class FirebaseService {
   void signOut() {
     _fbAuth.signOut();
   }
+
+  fb.DatabaseReference get fbRefGameSessions => _fbRefGameSessions;
 }

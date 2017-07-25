@@ -30,6 +30,7 @@ class GameSetup {
 
   void startGame() {
     if (gameService.game.players.isNotEmpty) {
+      gameService.createGame(["sarah","Wtf"]);
       _gameReady.add(true);
     }
   }

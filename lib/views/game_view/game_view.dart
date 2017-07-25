@@ -48,6 +48,8 @@ class GameView {
       return;
     }
 
+    _gameService.updateTest(_gameService.game.players[_gameService.game.currentPlayerIndex]);
+
     _gameService.game.players[_gameService.game.currentPlayerIndex].addDiceResult(scoreInput.value.toInt());
     scoreInput.updateValue(null);
     _gameService.game.nextPlayer();
