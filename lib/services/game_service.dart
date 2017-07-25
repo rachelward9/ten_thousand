@@ -13,31 +13,35 @@ class GameService {
   final FirebaseService _fbService;
   Game game = new Game();
 
+  List<Player> players = [];
+  String sessionRef;
+
   GameService(LoggerService this._log, FirebaseService this._fbService) {
     _log.info("$runtimeType()");
     game.players = _fbService.players;
   }
 
   void addPlayer(String name) {
-    _fbService.addPlayer(name);
+    players.add(new Player(name));
   }
 
-  void updatePlayer({String name, int score}) {
-    _fbService.updatePlayer(name: name, score: score);
+  Future updatePlayer(Player p) async {
+    try {
+      _fbService.fbRefGameSessions.child(sessionRef).child(p.name).update(p.toMap());
+    }
+    catch (error) {
+      _log.info("$runtimeType()::updatePlayer -- $error");
+    }
   }
 
-  void updateTest(Player p) {
-    _fbService.testUpdate(p);
-  }
+//  void updateTest(Player p) {
+//    _fbService.testUpdate(p);
+//  }
 
-  void createGame(List<String> playerNames) {
-    String sessionRef = _fbService.createSessionRef();
-    List<Player> players = [];
+  void createGame() {
+    sessionRef = _fbService.createSessionRef();
 
     _log.info("$runtimeType()::createGame -- $sessionRef");
-    playerNames.forEach((name) {
-      players.add(new Player(name));
-    });
 
     var newPlayers = {};
 
@@ -45,6 +49,6 @@ class GameService {
       newPlayers[p.name] = p.toMap();
     });
 
-    _fbService.fbRefGameSessions.child(sessionRef).update(newPlayers);
+    _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
   }
 }

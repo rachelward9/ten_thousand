@@ -9,7 +9,7 @@
     <material-fab mini
                   raised
                   (trigger)="startGame()"
-                  [disabled]="gameService.game.players.isEmpty">
+                  [disabled]="gameService.players.isEmpty">
       <glyph icon="play_arrow"></glyph>
     </material-fab>
   </section>
@@ -30,6 +30,6 @@
   </div>
 
   <div class="layout vertical">
-    <div *ngFor="let player of gameService.game.players">{{player.name}}</div>
+    <div *ngFor="let player of gameService.players">{{player.name}}</div>
   </div>
 </section>
