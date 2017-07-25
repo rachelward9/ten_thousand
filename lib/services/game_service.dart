@@ -51,4 +51,12 @@ class GameService {
 
     _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
   }
+
+  void endGame() {
+    _fbService.fbRefGameSessions.child(sessionRef).remove();
+    game.players.forEach((p) {
+      p.reset();
+    });
+    _fbService.players = [];
+  }
 }

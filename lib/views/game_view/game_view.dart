@@ -35,22 +35,21 @@ class GameView {
 
   void endGame() {
     _continueGame.add(false);
-    _gameService.game.players.forEach((Player p) {
-      p.reset();
-    });
+
+    _gameService.endGame();
   }
 
 //  TODO: Check for final turn, because you can add to the last person's score forever.
   void submitScore() {
     _log.info("$runtimeType()::submitScore() - scoreForm control group");
 
-    if (scoreInput.value == null || !scoreInput.valid) {
+    if (scoreInput.value == null || !scoreInput.valid || _gameService.game.players[_gameService.game.currentPlayerIndex].finalTurn == true) {
       return;
     }
 
+    _gameService.game.players[_gameService.game.currentPlayerIndex].addDiceResult(scoreInput.value.toInt());
     _gameService.updatePlayer(_gameService.game.players[_gameService.game.currentPlayerIndex]);
 
-    _gameService.game.players[_gameService.game.currentPlayerIndex].addDiceResult(scoreInput.value.toInt());
     scoreInput.updateValue(null);
     _gameService.game.nextPlayer();
   }

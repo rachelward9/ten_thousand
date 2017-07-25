@@ -17,10 +17,6 @@ class Game {
     nextPlayer();
   }
 
-//  void addPlayer(String name) {
-//    _players.add(new Player(name));
-//  }
-
   void removePlayer(Player player) {
     players.remove(player);
   }

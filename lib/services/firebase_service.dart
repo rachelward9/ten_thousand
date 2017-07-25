@@ -39,7 +39,6 @@ class FirebaseService {
 
     if (user != null) {
       players = [];
-//      _fbRefGameSessions.onChildAdded.listen(_newPlayer);
     }
   }
 
@@ -48,46 +47,11 @@ class FirebaseService {
     players.add(p);
   }
 
-//  TODO: stop using push(), so you can use your own keys.
-//  TODO: addPlayer() might not need to exist. We should organize by game sessions instead (multiple sessions -- yay!)
-//  Each game can have a list of players. They should have unique names though.
-//  Future addPlayer(String name) async {
-//    try {
-//      Player p = new Player(name);
-//      await _fbRefGameSessions.push(p.toMap());
-//    }
-//    catch (error) {
-//      print("FirebaseService()::addPlayer() -- $error");
-//    }
-//  }
-
   String createSessionRef() {
     String sessionRef = _fbRefGameSessions.push().key;
     _fbRefGameSessions.child(sessionRef).onChildAdded.listen(_newPlayer);
     return sessionRef;
   }
-
-//  void testUpdate(Player p) {
-//    var playerRef = _fbRefGameSessions.push().key;
-//
-//    _log.info("$runtimeType()::testUpdate() -- $playerRef");
-//
-//    var updates = {};
-////    updates[playerRef] = new Player("Stan", 500, 500, 0, false, false).toMap();
-//    updates[playerRef] = p.toMap();
-//
-//    _fbRefGameSessions.update(updates);
-//  }
-
-//  Future updatePlayer({String name, int score}) async {
-//    try {
-//      _fbRefGameSessions.child(name).set({"_score": score});
-//    } catch (error) {
-//      print("FBService()::updatePlayer() -- $error}");
-//    }
-//  }
-
-//  TODO: Figure out how to access the players' stats and update their scores.
 
   Future signIn() async {
     try {
