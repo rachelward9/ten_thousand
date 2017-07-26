@@ -6,9 +6,11 @@ import 'package:angular_components/angular_components.dart';
 import '../../services/logger_service.dart';
 import '../../services/game_service.dart';
 
+import '../../components/session_browser/session_browser.dart';
+
 @Component(selector: 'game-setup',
     templateUrl: 'game_setup.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives]
+    directives: const [CORE_DIRECTIVES, materialDirectives, SessionBrowser]
 )
 class GameSetup {
   final LoggerService _log;

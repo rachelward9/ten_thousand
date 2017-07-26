@@ -7,6 +7,7 @@ import 'package:firebase/firebase.dart' as fb;
 import 'logger_service.dart';
 
 import '../models/player.dart';
+import '../models/session.dart';
 
 @Injectable()
 class FirebaseService {
@@ -19,6 +20,7 @@ class FirebaseService {
   fb.User user;
 
   List<Player> players;
+  List<Session> sessions = [];
 
   FirebaseService(LoggerService this._log) {
     fb.initializeApp(
@@ -32,6 +34,8 @@ class FirebaseService {
     _fbAuth.onAuthStateChanged.listen(_authChanged);
     _fbDatabase = fb.database();
     _fbRefGameSessions = _fbDatabase.ref("sessions");
+    fbRefGameSessions.onChildAdded.listen(_newSession);
+    fbRefGameSessions.onChildRemoved.listen(_removeSession);
   }
 
   void _authChanged(fb.AuthEvent event) {
@@ -40,6 +44,22 @@ class FirebaseService {
     if (user != null) {
       players = [];
     }
+  }
+
+  void _newSession(fb.QueryEvent event) {
+    sessions.add(new Session("New Session!", event.snapshot.key));
+
+    _log.info("$runtimeType()::newSession() -- ${sessions}");
+  }
+
+//  TODO: This is clearing the whole list. Fix this!
+  void _removeSession(fb.QueryEvent event) {
+    _log.info("$runtimeType()::_removeSession() BEFORE -- ${sessions}");
+    sessions.removeWhere((s) {
+      s.sessionID == event.snapshot.key;
+    });
+
+    _log.info("$runtimeType()::_removeSession() AFTER -- ${sessions}");
   }
 
   void _newPlayer(fb.QueryEvent event) {
