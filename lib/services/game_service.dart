@@ -51,7 +51,7 @@ class GameService {
     });
 
     _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
-    _fbService.fbRefGameSessions.child(sessionRef).update();
+//    _fbService.fbRefGameSessions.child(sessionRef).update();
   }
 
   void endGame() {
