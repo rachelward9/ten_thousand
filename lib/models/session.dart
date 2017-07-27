@@ -4,7 +4,7 @@ class Session {
 
   Session(String this.name, String this.sessionID);
 
-  Map toMap() => {"name" : name};
+  Map toMap() => {"_name" : name};
 
-  Session.fromMap(Map map) : this(map['name'], map['sessionID']);
+  Session.fromMap(Map map) : this(map['_name'], map['sessionID']);
 }

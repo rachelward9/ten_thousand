@@ -2,36 +2,41 @@
 
 </style>
 
-<section class="flex layout vertical">
-  <section class="layout horizontal center">
-    <h1>Set Up New Game</h1>
+<div class="flex layout horizontal center">
+  <section class="flex layout vertical">
+    <div class="flex layout horizontal center">
+      <material-input label="Player Name"
+                      autoFocus
+                      [(ngModel)]="name"
+                      (keyup.enter)="addPlayer()">
+      </material-input>
 
-    <material-fab mini
-                  raised
-                  (trigger)="startGame()"
-                  [disabled]="gameService.players.isEmpty">
-      <glyph icon="play_arrow"></glyph>
-    </material-fab>
+      <material-fab mini
+                    raised
+                    (trigger)="addPlayer()"
+                    [disabled]="name.isEmpty">
+        <glyph icon="add"></glyph>
+      </material-fab>
+    </div>
+
+    <section class="layout horizontal center">
+      <material-input label="Name your game"
+                      [(ngModel)]="sessionName"
+                      (keyup.enter)="startGame()">
+      </material-input>
+
+      <material-fab mini
+                    raised
+                    (trigger)="startGame()"
+                    [disabled]="gameService.players.isEmpty">
+        <glyph icon="play_arrow"></glyph>
+      </material-fab>
+    </section>
+
+    <div class="layout vertical">
+      <div *ngFor="let player of gameService.players">{{player.name}}</div>
+    </div>
   </section>
 
-  <div class="flex layout horizontal center">
-    <material-input label="Player Name"
-                    autoFocus
-                    [(ngModel)]="name"
-                    (keyup.enter)="addPlayer()">
-    </material-input>
-
-    <material-fab mini
-                  raised
-                  (trigger)="addPlayer()"
-                  [disabled]="name.isEmpty">
-      <glyph icon="add"></glyph>
-    </material-fab>
-  </div>
-
-  <div class="layout vertical">
-    <div *ngFor="let player of gameService.players">{{player.name}}</div>
-  </div>
-</section>
-
-<session-browser></session-browser>
+  <session-browser class="flex"></session-browser>
+</div>

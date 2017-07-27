@@ -15,6 +15,7 @@ import '../../components/session_browser/session_browser.dart';
 class GameSetup {
   final LoggerService _log;
   final GameService gameService;
+  String sessionName;
 
   final StreamController<bool> _gameReady = new StreamController<bool>.broadcast();
   @Output() Stream<bool> get gameReady => _gameReady.stream;
@@ -32,8 +33,8 @@ class GameSetup {
   }
 
   void startGame() {
-    if (gameService.players.isNotEmpty) {
-      gameService.createGame();
+    if (gameService.players.isNotEmpty && (sessionName != null && sessionName.isNotEmpty)) {
+      gameService.createGame(sessionName);
       _gameReady.add(true);
     }
   }

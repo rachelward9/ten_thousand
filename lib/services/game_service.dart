@@ -6,6 +6,7 @@ import 'logger_service.dart';
 import 'firebase_service.dart';
 import '../models/game.dart';
 import '../models/player.dart';
+import '../models/session.dart';
 
 @Injectable()
 class GameService {
@@ -38,7 +39,7 @@ class GameService {
 //    _fbService.testUpdate(p);
 //  }
 
-  void createGame() {
+  void createGame(String sessionName) {
     sessionRef = _fbService.createSessionRef();
 
     _log.info("$runtimeType()::createGame -- $sessionRef");
@@ -50,6 +51,7 @@ class GameService {
     });
 
     _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
+    _fbService.fbRefGameSessions.child(sessionRef).update();
   }
 
   void endGame() {

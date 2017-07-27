@@ -52,12 +52,14 @@ class FirebaseService {
     _log.info("$runtimeType()::newSession() -- ${sessions}");
   }
 
-//  TODO: This is clearing the whole list. Fix this!
   void _removeSession(fb.QueryEvent event) {
     _log.info("$runtimeType()::_removeSession() BEFORE -- ${sessions}");
-    sessions.removeWhere((s) {
-      s.sessionID == event.snapshot.key;
-    });
+
+    for (int i = 0; i <= sessions.length; i++) {
+      if (sessions[i].sessionID == event.snapshot.key) {
+        sessions.removeAt(i);
+      }
+    }
 
     _log.info("$runtimeType()::_removeSession() AFTER -- ${sessions}");
   }
