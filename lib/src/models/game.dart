@@ -13,7 +13,7 @@ class Game {
   void newGame() {
     currentPlayerIndex = -1;
     scoreToBeat = null;
-    turnsRemaining = players.length;
+    turnsRemaining = players.length + 1;
     nextPlayer();
   }
 

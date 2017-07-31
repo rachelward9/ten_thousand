@@ -7,4 +7,6 @@ class Session {
   Map toMap() => {"_name" : name};
 
   Session.fromMap(Map map) : this(map['_name'], map['sessionID']);
+
+  String toString() => "Session name: $name ID: $sessionID";
 }
