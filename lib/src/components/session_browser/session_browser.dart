@@ -21,4 +21,6 @@ class SessionBrowser {
 
     existingSessions = _fbService.sessions;
   }
+
+//  TODO: Make sessions clickable (to join)
 }

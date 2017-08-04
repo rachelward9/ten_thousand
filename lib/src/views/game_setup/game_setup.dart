@@ -26,11 +26,12 @@ class GameSetup {
     _log.info("$runtimeType()");
   }
 
-//  TODO: Fix this throughout the app. It's adding players under "sessions", since I didn't update that code yet.
   void addPlayer() {
     gameService.addPlayer(name);
     name = "";
   }
+
+//  TODO: Create removePlayer()
 
   void startGame() {
     if (gameService.players.isNotEmpty && (sessionName != null && sessionName.isNotEmpty)) {

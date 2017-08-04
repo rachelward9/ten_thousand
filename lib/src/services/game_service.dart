@@ -26,7 +26,7 @@ class GameService {
     players.add(new Player(name));
   }
 
-  Future updatePlayer(Player p) async {
+  void updatePlayer(Player p) {
     try {
       _fbService.fbRefGameSessions.child(sessionRef).child(p.name).update(p.toMap());
     }
@@ -35,7 +35,7 @@ class GameService {
     }
   }
 
-  Future createGame(String sessionName) async {
+  void createGame(String sessionName) {
     sessionRef = _fbService.createSessionRef();
 
     _log.info("$runtimeType()::createGame -- $sessionRef");
@@ -46,8 +46,8 @@ class GameService {
       newPlayers[p.name] = p.toMap();
     });
 
-    await _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
-    await _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
+    _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
+    _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
   }
 
   void endGame() {

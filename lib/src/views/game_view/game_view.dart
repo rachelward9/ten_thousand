@@ -39,7 +39,7 @@ class GameView {
     _gameService.endGame();
   }
 
-//  TODO: Check for final turn, because you can add to the last person's score forever.
+//  TODO: Fix final turn, because it doesn't properly finish a round.
   void submitScore() {
     _log.info("$runtimeType()::submitScore() - scoreForm control group");
 

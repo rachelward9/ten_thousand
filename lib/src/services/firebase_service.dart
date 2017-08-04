@@ -47,7 +47,7 @@ class FirebaseService {
   }
 
   void _newSession(fb.QueryEvent event) {
-    String name = event.snapshot.child("_name")?.val();
+    String name = event.snapshot.child("name").val();
 
     sessions.add(new Session(name, event.snapshot.key));
   }
