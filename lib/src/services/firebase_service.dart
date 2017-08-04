@@ -47,9 +47,9 @@ class FirebaseService {
   }
 
   void _newSession(fb.QueryEvent event) {
-    sessions.add(new Session(event.snapshot.child("_name")?.val(), event.snapshot.key));
+    String name = event.snapshot.child("_name")?.val();
 
-    _log.info("$runtimeType()::newSession() -- ${event.snapshot.child("_name").val()}");
+    sessions.add(new Session(name, event.snapshot.key));
   }
 
   void _removeSession(fb.QueryEvent event) {
