@@ -65,6 +65,10 @@ class FirebaseService {
   }
 
   void _newPlayer(fb.QueryEvent event) {
+    if(event.snapshot.key == "name") {
+      return;
+    }
+
     Player p = new Player.fromMap(event.snapshot.val());
     players.add(p);
   }

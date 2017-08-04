@@ -35,28 +35,19 @@ class GameService {
     }
   }
 
-//  void updateTest(Player p) {
-//    _fbService.testUpdate(p);
-//  }
-
   Future createGame(String sessionName) async {
     sessionRef = _fbService.createSessionRef();
 
     _log.info("$runtimeType()::createGame -- $sessionRef");
 
-    var newPlayers = {};
+    Map<String, Map> newPlayers = {};
 
     players.forEach((p) {
       newPlayers[p.name] = p.toMap();
     });
 
-
-//    newPlayers["_name"] = sessionName;
-    
-//  TODO: Figure this out. Firebase seems mad about me setting name as a key with a String value, instead of giving it a child object.
-// Monty pointed out it's getting mad about the Player fromMap function.
     await _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
-    await _fbService.fbRefGameSessions.child("$sessionRef/name").set('"name": $sessionName');
+    await _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
   }
 
   void endGame() {
