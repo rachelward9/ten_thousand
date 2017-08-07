@@ -5,10 +5,10 @@ import '../../services/firebase_service.dart';
 
 import '../../models/session.dart';
 
-@Component(selector: 'session-browser',
+@Component(
+    selector: 'session-browser',
     templateUrl: 'session_browser.html',
-    directives: const [COMMON_DIRECTIVES],
-    providers: const []
+    directives: const [COMMON_DIRECTIVES]
 )
 class SessionBrowser {
   final LoggerService _log;
@@ -23,4 +23,7 @@ class SessionBrowser {
   }
 
 //  TODO: Make sessions clickable (to join)
+  void joinGame() {
+
+  }
 }

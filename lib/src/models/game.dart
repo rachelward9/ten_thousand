@@ -13,7 +13,7 @@ class Game {
   void newGame() {
     currentPlayerIndex = -1;
     scoreToBeat = null;
-    turnsRemaining = players.length + 1;
+    turnsRemaining = players.length;
     nextPlayer();
   }
 
@@ -44,19 +44,11 @@ class Game {
     if (players[currentPlayerIndex].score >= winVal) {
       scoreToBeat = players[currentPlayerIndex].score;
 
-      players.forEach((p) {
-        p.finalTurn = true;
-      });
-
       finalTurn = true;
     }
 
     if (finalTurn == true) {
       turnsRemaining--;
-    }
-
-    if (!players[currentPlayerIndex].finalTurn) {
-      return;
     }
   }
 }

@@ -39,11 +39,10 @@ class GameView {
     _gameService.endGame();
   }
 
-//  TODO: Fix final turn, because it doesn't properly finish a round.
   void submitScore() {
     _log.info("$runtimeType()::submitScore() - scoreForm control group");
 
-    if (scoreInput.value == null || !scoreInput.valid || _gameService.game.players[_gameService.game.currentPlayerIndex].finalTurn == true) {
+    if (scoreInput.value == null || !scoreInput.valid || _gameService.game.turnsRemaining == 0) {
       return;
     }
 
