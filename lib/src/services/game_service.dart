@@ -26,6 +26,10 @@ class GameService {
     players.add(new Player(name));
   }
 
+  void removePlayer(String name) {
+    game.players.removeWhere((player) => player.name == name);
+  }
+
   void updatePlayer(Player p) {
     try {
       _fbService.fbRefGameSessions.child(sessionRef).child(p.name).update(p.toMap());

@@ -34,7 +34,7 @@
     </section>
 
     <div class="layout vertical">
-      <div *ngFor="let player of gameService.players">{{player.name}}</div>
+      <div *ngFor="let player of gameService.players" (click)="removePlayer(player.name)">{{player.name}}</div>
     </div>
   </section>
 

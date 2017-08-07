@@ -31,7 +31,11 @@ class GameSetup {
     name = "";
   }
 
-//  TODO: Create removePlayer()
+//  TODO: Fix the player list so that it updates properly. Addding/removing players isn't reflected in the game, only the setup page.
+  void removePlayer(String name) {
+    _log.info("$runtimeType():: removePlayer() -- $name");
+    gameService.players.removeWhere((player) => player.name == name);
+  }
 
   void startGame() {
     if (gameService.players.isNotEmpty && (sessionName != null && sessionName.isNotEmpty)) {
