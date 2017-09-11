@@ -1,5 +1,4 @@
-import 'package:angular2/angular2.dart';
-import 'package:angular2/platform/browser.dart';
+import 'package:angular/angular.dart';
 
 import 'package:ten_thousand_ng/app_component.dart';
 import 'package:ten_thousand_ng/src/services/logger_service.dart';

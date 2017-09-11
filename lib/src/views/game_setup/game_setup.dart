@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
 import '../../services/logger_service.dart';
@@ -34,7 +34,7 @@ class GameSetup {
 //  TODO: Fix the player list so that it updates properly. Addding/removing players isn't reflected in the game, only the setup page.
   void removePlayer(String name) {
     _log.info("$runtimeType():: removePlayer() -- $name");
-    gameService.players.removeWhere((player) => player.name == name);
+    gameService.removePlayer(name);
   }
 
   void startGame() {

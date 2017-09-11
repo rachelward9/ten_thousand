@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular/core.dart';
 
 import 'logger_service.dart';
 import 'firebase_service.dart';
@@ -27,7 +27,7 @@ class GameService {
   }
 
   void removePlayer(String name) {
-    game.players.removeWhere((player) => player.name == name);
+    players.removeWhere((player) => player.name == name);
   }
 
   void updatePlayer(Player p) {
@@ -45,6 +45,8 @@ class GameService {
     _log.info("$runtimeType()::createGame -- $sessionRef");
 
     Map<String, Map> newPlayers = {};
+
+    _log.info("$runtimeType():: createGame() -- $players");
 
     players.forEach((p) {
       newPlayers[p.name] = p.toMap();

@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import '../../services/logger_service.dart';
 import '../../services/game_service.dart';
@@ -13,7 +14,7 @@ import '../../models/player.dart';
     templateUrl: 'game_view.html',
     directives: const [
       CORE_DIRECTIVES,
-      FORM_DIRECTIVES,
+      formDirectives,
       materialDirectives,
       materialNumberInputDirectives
     ])

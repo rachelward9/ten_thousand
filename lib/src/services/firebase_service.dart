@@ -1,7 +1,7 @@
 import 'dart:html';
 import 'dart:async';
 
-import 'package:angular2/core.dart';
+import 'package:angular/core.dart';
 import 'package:firebase/firebase.dart' as fb;
 
 import 'logger_service.dart';
@@ -38,16 +38,16 @@ class FirebaseService {
     fbRefGameSessions.onChildRemoved.listen(_removeSession);
   }
 
-  void _authChanged(fb.AuthEvent event) {
-    user = event.user;
+  void _authChanged(fb.User fbUser) {
+    user = fbUser;
 
     if (user != null) {
       players = [];
     }
   }
 
-  void _newSession(fb.QueryEvent event) {
-    String name = event.snapshot.child("name").val();
+  Future _newSession(fb.QueryEvent event) async {
+    String name = await event.snapshot.child("name").val();
 
     sessions.add(new Session(name, event.snapshot.key));
   }
