@@ -17,10 +17,6 @@ class Game {
     nextPlayer();
   }
 
-//  void addPlayer(String name) {
-//    _players.add(new Player(name));
-//  }
-
   void removePlayer(Player player) {
     players.remove(player);
   }
@@ -48,19 +44,11 @@ class Game {
     if (players[currentPlayerIndex].score >= winVal) {
       scoreToBeat = players[currentPlayerIndex].score;
 
-      players.forEach((p) {
-        p.finalTurn = true;
-      });
-
       finalTurn = true;
     }
 
     if (finalTurn == true) {
       turnsRemaining--;
-    }
-
-    if (!players[currentPlayerIndex].finalTurn) {
-      return;
     }
   }
 }

@@ -1,13 +1,13 @@
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
-import '../../services/logger_service.dart';
-import '../../services/game_service.dart';
-import '../../services/firebase_service.dart';
+import 'src/services/logger_service.dart';
+import 'src/services/game_service.dart';
+import 'src/services/firebase_service.dart';
 
-import '../login_view/login_view.dart';
-import '../game_setup/game_setup.dart';
-import '../game_view/game_view.dart';
+import 'src/views/login_view/login_view.dart';
+import 'src/views/game_setup/game_setup.dart';
+import 'src/views/game_view/game_view.dart';
 
 @Component(
   selector: 'my-app',

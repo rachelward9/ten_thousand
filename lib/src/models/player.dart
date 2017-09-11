@@ -5,13 +5,12 @@ class Player {
   int _lastDiceResult;
   int bustCount;
   bool myTurn;
-  bool finalTurn;
 
-  Player(this.name, [this._score, this._lastDiceResult, this.bustCount, this.myTurn, this.finalTurn]) {
+  Player(this.name, [this._score, this._lastDiceResult, this.bustCount, this.myTurn]) {
     reset();
   }
 
-  Player.fromMap(Map map) : this(map['name'], map['_score'], map['_lastDiceResult'], map['bustCount'], map['myTurn'], map['finalTurn']);
+  Player.fromMap(Map map) : this(map['name'], map['_score'], map['_lastDiceResult'], map['bustCount'], map['myTurn']);
 
   Map toMap() => {
     "name" : name,
@@ -19,7 +18,6 @@ class Player {
     "_lastDiceResult" : _lastDiceResult,
     "bustCount" : bustCount,
     "myTurn" : myTurn,
-    "finalTurn" : finalTurn
   };
 
   void reset() {
@@ -27,7 +25,6 @@ class Player {
     _lastDiceResult = null;
     bustCount = 0;
     myTurn = false;
-    finalTurn = false;
   }
 
   void addDiceResult(int value) {
