@@ -33,9 +33,13 @@
       </material-fab>
     </section>
 
-    <div class="layout vertical">
-      <div *ngFor="let player of gameService.players" (click)="removePlayer(player.name)">{{player.name}}</div>
-    </div>
+    <material-chips class="layout vertical">
+      <reorder-list (reorder)="onReorder($event)">
+        <material-chip *ngFor="let player of gameService.players"
+                       reorderItem
+                       (remove)="removePlayer(player.name)">{{player.name}}</material-chip>
+      </reorder-list>
+    </material-chips>
   </section>
 
   <session-browser class="flex"></session-browser>
