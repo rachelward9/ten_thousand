@@ -1,19 +1,21 @@
 class Player {
   final String name;
 
+  int playerTurnOrder;
   int _score;
   int _lastDiceResult;
   int bustCount;
   bool myTurn;
 
-  Player(this.name, [this._score, this._lastDiceResult, this.bustCount, this.myTurn]) {
+  Player(this.name, [this.playerTurnOrder, this._score, this._lastDiceResult, this.bustCount, this.myTurn]) {
     reset();
   }
 
-  Player.fromMap(Map map) : this(map['name'], map['_score'], map['_lastDiceResult'], map['bustCount'], map['myTurn']);
+  Player.fromMap(Map map) : this(map['name'], map['playerTurnOrder'], map['_score'], map['_lastDiceResult'], map['bustCount'], map['myTurn']);
 
   Map toMap() => {
     "name" : name,
+    "playerTurnOrder": playerTurnOrder,
     "_score" : _score,
     "_lastDiceResult" : _lastDiceResult,
     "bustCount" : bustCount,
@@ -42,6 +44,5 @@ class Player {
 //  UI will handle this. If canUndo is false, the button is disabled.
   bool get canUndo => _lastDiceResult != null;
 
-
-  @override String toString() => "$name: $_score";
+  @override String toString() => "Player $playerTurnOrder - $name: $_score";
 }

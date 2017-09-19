@@ -49,5 +49,6 @@ class GameSetup {
   void onReorder(ReorderEvent reorder) {
     gameService.players.insert(
         reorder.destIndex, gameService.players.removeAt(reorder.sourceIndex));
+    _log.info("$runtimeType()::onReorder() -- ${gameService.players}");
   }
 }

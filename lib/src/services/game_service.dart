@@ -49,8 +49,15 @@ class GameService {
     _log.info("$runtimeType():: createGame() -- $players");
 
     players.forEach((p) {
+      p.playerTurnOrder = players.indexOf(p);
+
+      _log.info("$runtimeType()::createGame() -- player turn order: $players");
       newPlayers[p.name] = p.toMap();
     });
+
+//    TODO: Figure out player sorting
+//    game.players.sort((pA, pB) => pA.playerTurnOrder.compareTo(pB.playerTurnOrder));
+//    _log.info("$runtimeType()::createGame() -- AFTER SORT ${game.players}");
 
     _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
     _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
