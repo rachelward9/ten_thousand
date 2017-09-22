@@ -61,5 +61,5 @@ class GameView {
 
   Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
 
-  List<Player> get players => _gameService.game.players;
+  List<Player> get players => _gameService.orderedPlayers;
 }

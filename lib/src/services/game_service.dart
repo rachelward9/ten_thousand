@@ -55,10 +55,6 @@ class GameService {
       newPlayers[p.name] = p.toMap();
     });
 
-//    TODO: Figure out player sorting
-//    game.players.sort((pA, pB) => pA.playerTurnOrder.compareTo(pB.playerTurnOrder));
-//    _log.info("$runtimeType()::createGame() -- AFTER SORT ${game.players}");
-
     _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
     _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
   }
@@ -69,5 +65,10 @@ class GameService {
       p.reset();
     });
     _fbService.players = [];
+  }
+
+  List<Player> get orderedPlayers {
+    game.players.sort((pA, pB) => pA.playerTurnOrder.compareTo(pB.playerTurnOrder));
+    return game.players;
   }
 }
