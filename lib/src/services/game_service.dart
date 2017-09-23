@@ -16,6 +16,7 @@ class GameService {
 
   List<Player> players = [];
   String sessionRef;
+  String sessionName;
 
   GameService(LoggerService this._log, FirebaseService this._fbService) {
     _log.info("$runtimeType()");
@@ -39,24 +40,21 @@ class GameService {
     }
   }
 
-  void createGame(String sessionName) {
+  void createGame(String sessionTitle) {
     sessionRef = _fbService.createSessionRef();
+    sessionName = sessionTitle;
 
-    _log.info("$runtimeType()::createGame -- $sessionRef");
-
-    Map<String, Map> newPlayers = {};
-
-    _log.info("$runtimeType():: createGame() -- $players");
+    final Map<String, Map> _newPlayers = {};
 
     players.forEach((p) {
       p.playerTurnOrder = players.indexOf(p);
 
       _log.info("$runtimeType()::createGame() -- player turn order: $players");
-      newPlayers[p.name] = p.toMap();
+      _newPlayers[p.name] = p.toMap();
     });
 
-    _fbService.fbRefGameSessions.child(sessionRef).set(newPlayers);
-    _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionName);
+    _fbService.fbRefGameSessions.child(sessionRef).set(_newPlayers);
+    _fbService.fbRefGameSessions.child("$sessionRef/name").set(sessionTitle);
   }
 
   void endGame() {

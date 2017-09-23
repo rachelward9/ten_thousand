@@ -67,4 +67,5 @@ class GameView implements OnInit{
   }
 
   Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
+  String get sessionName => _gameService.sessionName;
 }

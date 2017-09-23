@@ -5,9 +5,15 @@
     margin-bottom: .5rem;
     padding: .5rem;
   }
+
+  .session-name {
+    font-size: 2rem;
+  }
 </style>
 
 <section>
+  <div class="session-name">{{sessionName}}</div>
+
   <div *ngFor="let player of players" class="layout vertical player-card">
     <section class="layout horizontal center justified">
       <div>{{player.name}}</div>

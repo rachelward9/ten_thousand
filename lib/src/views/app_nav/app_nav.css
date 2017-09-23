@@ -1,0 +1,21 @@
+.app-name {
+  font-size: 1.5rem;
+}
+
+.user-avatar {
+  height: 1.5rem;
+  margin-right: .5rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.user-name {
+  cursor: default;
+}
+
+material-button {
+  position: fixed;
+  top: 1.5rem;
+  width: 5rem;
+}

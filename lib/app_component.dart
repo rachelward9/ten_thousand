@@ -6,6 +6,7 @@ import 'src/services/game_service.dart';
 import 'src/services/firebase_service.dart';
 
 import 'src/views/login_view/login_view.dart';
+import 'src/views/app_nav/app_nav.dart';
 import 'src/views/game_setup/game_setup.dart';
 import 'src/views/game_view/game_view.dart';
 
@@ -13,7 +14,7 @@ import 'src/views/game_view/game_view.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [CORE_DIRECTIVES, materialDirectives, LoginView, GameSetup, GameView],
+  directives: const [CORE_DIRECTIVES, materialDirectives, LoginView, GameSetup, GameView, AppNav],
   providers: const [materialProviders, GameService]
 )
 class AppComponent {
@@ -22,7 +23,7 @@ class AppComponent {
 
   bool setUpGame = true;
 
-  AppComponent(LoggerService this._log, this.fbService) {
+  AppComponent(this._log, this.fbService) {
     _log.info("$runtimeType()");
   }
 
