@@ -14,16 +14,14 @@ class SessionBrowser {
   final LoggerService _log;
   final FirebaseService _fbService;
 
-  List<Session> existingSessions;
-
   SessionBrowser(LoggerService this._log, FirebaseService this._fbService) {
     _log.info("$runtimeType()");
-
-    existingSessions = _fbService.sessions;
   }
 
 //  TODO: Make sessions clickable (to join)
   void joinGame() {
-
+    _log.info("$runtimeType()::joinGame() -- existingSessions - $sessions");
   }
+
+  List<Session> get sessions => _fbService.sessions;
 }

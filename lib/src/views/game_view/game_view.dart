@@ -61,5 +61,9 @@ class GameView {
 
   Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
 
-  List<Player> get players => _gameService.game.players;
+//  List<Player> get players => _gameService.orderedPlayers;
+  List<Player> get players {
+    _log.info("$runtimeType()::get players() -- ${_gameService.orderedPlayers}");
+    return _gameService.orderedPlayers;
+  }
 }

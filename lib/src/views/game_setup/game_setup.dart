@@ -6,6 +6,8 @@ import 'package:angular_components/angular_components.dart';
 import '../../services/logger_service.dart';
 import '../../services/game_service.dart';
 
+import '../../models/player.dart';
+
 import '../../components/session_browser/session_browser.dart';
 
 @Component(selector: 'game-setup',
@@ -15,11 +17,11 @@ import '../../components/session_browser/session_browser.dart';
 class GameSetup {
   final LoggerService _log;
   final GameService gameService;
-  String sessionName;
 
   final StreamController<bool> _gameReady = new StreamController<bool>.broadcast();
   @Output() Stream<bool> get gameReady => _gameReady.stream;
 
+  String sessionName;
   String name = "";
 
   GameSetup(LoggerService this._log, GameService this.gameService) {
@@ -31,7 +33,7 @@ class GameSetup {
     name = "";
   }
 
-//  TODO: Fix the player list so that it updates properly. Addding/removing players isn't reflected in the game, only the setup page.
+//  TODO: Fix the player list so that it updates properly. Adding/removing players isn't reflected in the game, only the setup page.
   void removePlayer(String name) {
     _log.info("$runtimeType():: removePlayer() -- $name");
     gameService.removePlayer(name);
@@ -42,5 +44,11 @@ class GameSetup {
       gameService.createGame(sessionName);
       _gameReady.add(true);
     }
+  }
+
+  void onReorder(ReorderEvent reorder) {
+    gameService.players.insert(
+        reorder.destIndex, gameService.players.removeAt(reorder.sourceIndex));
+    _log.info("$runtimeType()::onReorder() -- ${gameService.players}");
   }
 }

@@ -49,6 +49,9 @@ class GameService {
     _log.info("$runtimeType():: createGame() -- $players");
 
     players.forEach((p) {
+      p.playerTurnOrder = players.indexOf(p);
+
+      _log.info("$runtimeType()::createGame() -- player turn order: $players");
       newPlayers[p.name] = p.toMap();
     });
 
@@ -62,5 +65,10 @@ class GameService {
       p.reset();
     });
     _fbService.players = [];
+  }
+
+  List<Player> get orderedPlayers {
+    game.players.sort((pA, pB) => pA.playerTurnOrder.compareTo(pB.playerTurnOrder));
+    return game.players;
   }
 }

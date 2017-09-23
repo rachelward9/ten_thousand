@@ -27,15 +27,14 @@ class FirebaseService {
         apiKey: "AIzaSyAS7fJVerd-WPWaaJ7ghO8KdDIHzfTXJek",
         authDomain: "ten-thousand-dcc16.firebaseapp.com",
         databaseURL: "https://ten-thousand-dcc16.firebaseio.com",
-        storageBucket: "ten-thousand-dcc16.appspot.com");
+        storageBucket: "ten-thousand-dcc16.appspot.com"
+    );
 
     _fbGoogleAuthProvider = new fb.GoogleAuthProvider();
     _fbAuth = fb.auth();
     _fbAuth.onAuthStateChanged.listen(_authChanged);
     _fbDatabase = fb.database();
     _fbRefGameSessions = _fbDatabase.ref("sessions");
-    fbRefGameSessions.onChildAdded.listen(_newSession);
-    fbRefGameSessions.onChildRemoved.listen(_removeSession);
   }
 
   void _authChanged(fb.User fbUser) {
@@ -43,11 +42,13 @@ class FirebaseService {
 
     if (user != null) {
       players = [];
+      _fbRefGameSessions.onChildAdded.listen(_newSession);
+      _fbRefGameSessions.onChildRemoved.listen(_removeSession);
     }
   }
 
   Future _newSession(fb.QueryEvent event) async {
-    String name = await event.snapshot.child("name").val();
+    final String name = await event.snapshot.child("name").val();
 
     sessions.add(new Session(name, event.snapshot.key));
   }
