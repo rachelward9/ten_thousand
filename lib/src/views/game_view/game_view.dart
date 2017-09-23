@@ -18,12 +18,14 @@ import '../../models/player.dart';
       materialDirectives,
       materialNumberInputDirectives
     ])
-class GameView {
+class GameView implements OnInit{
   final LoggerService _log;
   final GameService _gameService;
 
   final StreamController<bool> _continueGame = new StreamController<bool>.broadcast();
   @Output() Stream<bool> get continueGame => _continueGame.stream;
+
+  List<Player> players;
 
   Control scoreInput = new Control();
 
@@ -31,7 +33,12 @@ class GameView {
 
   GameView(LoggerService this._log, GameService this._gameService) {
     _log.info("$runtimeType()");
+  }
+
+  ngOnInit() {
+    _log.info("$runtimeType()::ngOnInit() -- ${_gameService.orderedPlayers}");
     _gameService.game.newGame();
+    players = _gameService.orderedPlayers;
   }
 
   void endGame() {
@@ -60,10 +67,4 @@ class GameView {
   }
 
   Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
-
-//  List<Player> get players => _gameService.orderedPlayers;
-  List<Player> get players {
-    _log.info("$runtimeType()::get players() -- ${_gameService.orderedPlayers}");
-    return _gameService.orderedPlayers;
-  }
 }

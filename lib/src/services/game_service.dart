@@ -68,6 +68,7 @@ class GameService {
   }
 
   List<Player> get orderedPlayers {
+    game.players = new List.from(players);
     game.players.sort((pA, pB) => pA.playerTurnOrder.compareTo(pB.playerTurnOrder));
     return game.players;
   }
