@@ -7,6 +7,7 @@ import '../../services/firebase_service.dart';
 
 @Component(selector: 'login-view',
     templateUrl: 'login_view.html',
+    styleUrls: const ['login_view.css'],
     directives: const [materialDirectives],
     providers: const []
 )

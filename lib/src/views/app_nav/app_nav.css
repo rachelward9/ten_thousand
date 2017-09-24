@@ -1,6 +1,20 @@
+.nav-main-container {
+  padding: 1rem;
+  background-color: #030219;
+  color: #E5E5E5;
+  border-bottom: .05rem solid #E5E5E5;
+}
+
 .app-name {
   font-size: 1.5rem;
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 300;
 }
+
+.user-container {
+  position: fixed;
+  right: 1rem;
+ }
 
 .user-avatar {
   height: 1.5rem;
@@ -12,6 +26,9 @@
 
 .user-name {
   cursor: default;
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 100;
+  font-size: 1.25rem;
 }
 
 material-button {

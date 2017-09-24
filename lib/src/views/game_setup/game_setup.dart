@@ -12,6 +12,7 @@ import '../../components/session_browser/session_browser.dart';
 
 @Component(selector: 'game-setup',
     templateUrl: 'game_setup.html',
+    styleUrls: const ['game_setup.css'],
     directives: const [CORE_DIRECTIVES, materialDirectives, SessionBrowser]
 )
 class GameSetup {
