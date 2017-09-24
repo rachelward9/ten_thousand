@@ -1,0 +1,33 @@
+.game-container {
+  padding: 1em 3rem 3rem 3rem;
+}
+
+.session-name {
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  margin-top: 3rem;
+}
+
+.card-container {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.player-card {
+  min-width: 15rem;
+  -webkit-border-radius: .15rem;
+  -moz-border-radius: .15rem;
+  border-radius: .15rem;
+  background-color: white;
+  color: #030219;
+  margin-bottom: .5rem;
+  padding: .5rem;
+  opacity: .75;
+  height: 50%;
+}
+
+.active-player {
+  opacity: 1;
+  height: 75%;
+}

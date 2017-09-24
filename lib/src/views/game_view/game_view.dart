@@ -12,6 +12,7 @@ import '../../models/player.dart';
 @Component(
     selector: 'game-view',
     templateUrl: 'game_view.html',
+    styleUrls: const ['game_view.css'],
     directives: const [
       CORE_DIRECTIVES,
       formDirectives,

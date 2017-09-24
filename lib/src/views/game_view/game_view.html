@@ -1,40 +1,28 @@
-<style>
-  .player-card {
-    width: 50%;
-    border: 1px solid purple;
-    margin-bottom: .5rem;
-    padding: .5rem;
-  }
-
-  .session-name {
-    font-size: 2rem;
-  }
-</style>
-
-<section>
+<section class="flex layout vertical game-container" style="overflow: hidden;">
   <div class="session-name">{{sessionName}}</div>
 
-  <div *ngFor="let player of players" class="layout vertical player-card">
-    <section class="layout horizontal center justified">
-      <div>{{player.name}}</div>
-      <div>{{player.score}}</div>
+  <div class="flex layout horizontal end card-container" style="overflow: auto;">
+    <div *ngFor="let player of players" class="flex layout vertical player-card" [class.active-player]="player == currentPlayer">
+      <section class="layout horizontal center justified">
+        <div>{{player.name}}</div>
+        <div>{{player.score}}</div>
 
-      <material-fab [hidden]="player.myTurn == false"
-                    mini
-                    raised
-                    (trigger)="submitScore()"
-                    [disabled]="!scoreInput.valid || scoreInput.value == null">
-        <glyph icon="navigate_next"></glyph>
-      </material-fab>
+        <material-fab [hidden]="player.myTurn == false"
+                      mini
+                      raised
+                      (trigger)="submitScore()"
+                      [disabled]="!scoreInput.valid || scoreInput.value == null">
+          <glyph icon="navigate_next"></glyph>
+        </material-fab>
 
-      <material-fab [hidden]="player.myTurn == false"
-                    mini
-                    raised
-                    (trigger)="bust()"
-                    [disabled]="!scoreInput.valid || (scoreInput.value != null && scoreInput.value > 0)">
-        <glyph icon="sentiment_very_dissatisfied"></glyph>
-      </material-fab>
-    </section>
+        <material-fab [hidden]="player.myTurn == false"
+                      mini
+                      raised
+                      (trigger)="bust()"
+                      [disabled]="!scoreInput.valid || (scoreInput.value != null && scoreInput.value > 0)">
+          <glyph icon="sentiment_very_dissatisfied"></glyph>
+        </material-fab>
+      </section>
 
       <material-input *ngIf="player == currentPlayer"
                       type="number"
@@ -44,10 +32,11 @@
                       [ngFormControl]="scoreInput"
                       (keyup.enter)="submitScore()">
       </material-input>
+    </div>
   </div>
 </section>
 
-<section>
+<section class="flex layout vertical end-justfied">
   <material-fab mini
                 raised
                 (trigger)="endGame()">
