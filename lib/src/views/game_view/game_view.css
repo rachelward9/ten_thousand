@@ -14,7 +14,6 @@
 }
 
 .player-card {
-  min-width: 15rem;
   -webkit-border-radius: .15rem;
   -moz-border-radius: .15rem;
   border-radius: .15rem;
@@ -24,11 +23,24 @@
   padding: .5rem;
   opacity: .75;
   height: 50%;
+  width: 25%;
+  min-height: 10rem;
+  min-width: 15rem;
+  margin-right: 1rem;
 }
 
 .active-player {
   opacity: 1;
   height: 75%;
+  min-height: 15rem;
+}
+
+.stop-btn {
+  background-color: #3E5800;
+}
+
+.btn-container {
+  margin-top: 2rem;
 }
 
 /* SCROLL BAR */

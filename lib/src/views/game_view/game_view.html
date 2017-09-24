@@ -34,12 +34,14 @@
       </material-input>
     </div>
   </div>
+
+  <div class="btn-container">
+    <material-fab mini
+                  raised
+                  (trigger)="endGame()"
+                  class="self-start stop-btn">
+      <glyph icon="stop"></glyph>
+    </material-fab>
+  </div>
 </section>
 
-<section class="flex layout vertical end-justfied">
-  <material-fab mini
-                raised
-                (trigger)="endGame()">
-    <glyph icon="stop"></glyph>
-  </material-fab>
-</section>
