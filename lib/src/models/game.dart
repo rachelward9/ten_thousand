@@ -4,8 +4,6 @@ class Game {
   static const int TEN_THOUSAND = 10000;
 
   List<Player> players = [];
-
-//  TODO: Update the currenPlayerIndex and game logic, because now turn order can be determined by players on setup view.
   int currentPlayerIndex;
   int scoreToBeat;
   int turnsRemaining;

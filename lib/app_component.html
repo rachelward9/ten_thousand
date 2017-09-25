@@ -1,16 +1,14 @@
-<login-view class="flex" *ngIf="fbService.user == null"></login-view>
+<login-view class="fit layout vertical center-center" *ngIf="fbService.user == null"></login-view>
 
-<div *ngIf="fbService.user != null" class="flex layout vertical">
-  <section class="flex layout horizontal center end-justified">
-    <img class="icon user-avatar" [src]="fbService.user?.photoURL">
-    <div>{{fbService.user?.displayName}}</div>
+<div *ngIf="fbService.user != null" class="fit layout vertical">
+  <div *ngIf="setUpGame" class="flex layout vertical">
+    <app-nav class="layout horizontal center justified"></app-nav>
 
-    <material-button (click)="fbService.signOut()">Sign Out</material-button>
-  </section>
+    <h1>Ten Thousand</h1>
 
-  <h1>Ten Thousand</h1>
+    <game-setup (gameReady)="gameReady($event)" class="flex layout vertical"></game-setup>
+  </div>
 
-  <game-setup *ngIf="setUpGame" (gameReady)="gameReady($event)" class="flex layout vertical"></game-setup>
   <game-view *ngIf="!setUpGame" (continueGame)="gameReady($event)" class="flex layout vertical"></game-view>
 </div>
 

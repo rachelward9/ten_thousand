@@ -4,18 +4,18 @@ import 'package:angular_components/angular_components.dart';
 import '../../services/logger_service.dart';
 import '../../services/firebase_service.dart';
 
-
-@Component(selector: 'login-view',
-    templateUrl: 'login_view.html',
-    styleUrls: const ['login_view.css'],
-    directives: const [materialDirectives],
-    providers: const []
+@Component(selector: 'app-nav',
+    templateUrl: 'app_nav.html',
+    styleUrls: const['app_nav.css'],
+    directives: const [CORE_DIRECTIVES, materialDirectives]
 )
-class LoginView {
+class AppNav {
   final LoggerService _log;
   final FirebaseService fbService;
 
-  LoginView(LoggerService this._log, this.fbService) {
+  bool showMenuPopup = false;
+
+  AppNav(this._log, this.fbService) {
     _log.info("$runtimeType()");
   }
 }
