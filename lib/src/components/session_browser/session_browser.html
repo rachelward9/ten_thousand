@@ -1,0 +1,16 @@
+<style>
+.session-name {
+  cursor: pointer;
+}
+
+  .session-name:hover {
+    background: lightcyan;
+  }
+</style>
+
+<h1>Sessions</h1>
+<div *ngFor="let session of sessions"
+     class="session-name"
+     (click)="joinGame()">
+{{session.name}}
+</div>

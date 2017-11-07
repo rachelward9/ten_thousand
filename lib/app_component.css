@@ -1,0 +1,10 @@
+login-view, .main-app-container {
+  font-family: "mr-eaves-xl-modern", sans-serif;
+}
+
+h1 {
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 400;
+  padding-left: 5rem;
+  margin-top: 3rem;
+}

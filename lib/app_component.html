@@ -1,0 +1,14 @@
+<login-view class="fit layout vertical center-center" *ngIf="fbService.user == null"></login-view>
+
+<div *ngIf="fbService.user != null" class="fit layout vertical">
+  <div *ngIf="setUpGame" class="flex layout vertical">
+    <app-nav class="layout horizontal center justified"></app-nav>
+
+    <h1>Ten Thousand</h1>
+
+    <game-setup (gameReady)="gameReady($event)" class="flex layout vertical"></game-setup>
+  </div>
+
+  <game-view *ngIf="!setUpGame" (continueGame)="gameReady($event)" class="flex layout vertical"></game-view>
+</div>
+

@@ -1,0 +1,56 @@
+<div class="flex layout horizontal center-justified main-container">
+  <div class="flex layout vertical center setup-container">
+    <div class="layout vertical center end-justified setup-message">
+      Create your player list, name your game, and start playing!
+    </div>
+
+    <div class="layout vertical center-center input-group-container">
+      <div class="layout horizontal center">
+        <material-input label="Player Name"
+                        autoFocus
+                        [(ngModel)]="name"
+                        (keyup.enter)="addPlayer()">
+        </material-input>
+
+        <material-fab mini
+                      raised
+                      (trigger)="addPlayer()"
+                      [disabled]="name.isEmpty">
+          <glyph icon="add"></glyph>
+        </material-fab>
+      </div>
+
+      <div class="layout horizontal center">
+        <material-input label="Name your game"
+                        [(ngModel)]="sessionName"
+                        (keyup.enter)="startGame()">
+        </material-input>
+
+        <material-fab mini
+                      raised
+                      (trigger)="startGame()"
+                      [disabled]="gameService.players.isEmpty || sessionName == null || sessionName?.isEmpty">
+          <glyph icon="play_arrow"></glyph>
+        </material-fab>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex layout vertical center player-list-container">
+    <div class="layout vertical center end-justified setup-message">Player List Manager</div>
+
+    <div class="layout vertical">
+      <div *ngIf="gameService.players.isEmpty" class="self-center empty-list-message">You haven't added any players yet.</div>
+      <material-chips *ngIf="gameService.players.isNotEmpty">
+        <reorder-list (reorder)="onReorder($event)">
+          <material-chip *ngFor="let player of gameService.players"
+                         reorderItem
+                         class="layout horizontal justified"
+                         (remove)="removePlayer(player.name)">
+            {{player.name}}
+          </material-chip>
+        </reorder-list>
+      </material-chips>
+    </div>
+  </div>
+</div>

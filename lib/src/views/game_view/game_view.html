@@ -1,0 +1,47 @@
+<section class="flex layout vertical game-container" style="overflow: hidden;">
+  <div class="session-name">{{sessionName}}</div>
+
+  <div class="flex layout horizontal end card-container" style="overflow: auto;">
+    <div *ngFor="let player of players" class="flex layout vertical player-card" [class.active-player]="player == currentPlayer">
+      <section class="layout horizontal center justified">
+        <div>{{player.name}}</div>
+        <div>{{player.score}}</div>
+
+        <material-fab [hidden]="player.myTurn == false"
+                      mini
+                      raised
+                      (trigger)="submitScore()"
+                      [disabled]="!scoreInput.valid || scoreInput.value == null">
+          <glyph icon="navigate_next"></glyph>
+        </material-fab>
+
+        <material-fab [hidden]="player.myTurn == false"
+                      mini
+                      raised
+                      (trigger)="bust()"
+                      [disabled]="!scoreInput.valid || (scoreInput.value != null && scoreInput.value > 0)">
+          <glyph icon="sentiment_very_dissatisfied"></glyph>
+        </material-fab>
+      </section>
+
+      <material-input *ngIf="player == currentPlayer"
+                      type="number"
+                      checkNonNegative
+                      keypressUpdate
+                      autoFocus
+                      [ngFormControl]="scoreInput"
+                      (keyup.enter)="submitScore()">
+      </material-input>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <material-fab mini
+                  raised
+                  (trigger)="endGame()"
+                  class="self-start stop-btn">
+      <glyph icon="stop"></glyph>
+    </material-fab>
+  </div>
+</section>
+

@@ -1,0 +1,39 @@
+.login-container {
+  background-color: #030219;
+  max-height: 40%;
+  min-height: 18rem;
+  width: 40%;
+  min-width: 18rem;
+  padding: 2rem;
+}
+
+h1 {
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+}
+
+button {
+  background-image: url(assets/images/btn_google_light_normal_ios.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-color: white;
+  color: #260333;
+  padding: .5rem .75rem .5rem 3rem;
+  border: none;
+  -webkit-border-radius: .15rem;
+  -moz-border-radius: .15rem;
+  border-radius: .15rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+img {
+  border: none;
+}
+
+.tag-line {
+  font-family: "mr-eaves-xl-modern", sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
+}

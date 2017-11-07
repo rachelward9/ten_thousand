@@ -1,0 +1,17 @@
+<section class="nav-main-container flex layout horizontal center">
+  <div class="app-name">Lair de Rach</div>
+
+  <div class="user-container layout horizontal center-center">
+    <img class="icon user-avatar" [src]="fbService.user.photoURL">
+    <div class="user-name"
+         (click)="showMenuPopup = !showMenuPopup"
+         popupSource
+         #source="popupSource">
+      {{fbService.user.displayName}}
+    </div>
+  </div>
+
+  <material-popup [visible]="showMenuPopup" [source]="source">
+    <material-button (trigger)="fbService.signOut()" raised>Sign Out</material-button>
+  </material-popup>
+</section>
