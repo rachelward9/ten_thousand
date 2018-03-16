@@ -27,9 +27,7 @@ class GameView implements OnInit{
   @Output() Stream<bool> get continueGame => _continueGame.stream;
 
   List<Player> players;
-
   Control scoreInput = new Control();
-
   num rollResult;
 
   GameView(LoggerService this._log, GameService this._gameService) {
@@ -44,7 +42,6 @@ class GameView implements OnInit{
 
   void endGame() {
     _continueGame.add(false);
-
     _gameService.endGame();
   }
 
@@ -69,4 +66,6 @@ class GameView implements OnInit{
 
   Player get currentPlayer => _gameService.game.players[_gameService.game.currentPlayerIndex];
   String get sessionName => _gameService.sessionName;
+  bool get gameOver => _gameService.game.turnsRemaining == 0;
+  Player get winner => _gameService.game.winner;
 }

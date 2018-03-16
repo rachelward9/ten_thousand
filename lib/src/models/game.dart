@@ -8,6 +8,7 @@ class Game {
   int scoreToBeat;
   int turnsRemaining;
   bool finalTurn;
+  Player winner;
 
   void newGame() {
     currentPlayerIndex = -1;
@@ -44,6 +45,9 @@ class Game {
       scoreToBeat = players[currentPlayerIndex].score;
 
       finalTurn = true;
+      List<Player> scoreOrder = new List.from(players);
+      scoreOrder.sort((Player a, Player b) => b.score.compareTo(a.score));
+      winner = scoreOrder.first;
     }
 
     if (finalTurn == true) {

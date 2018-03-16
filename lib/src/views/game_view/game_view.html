@@ -2,12 +2,15 @@
   <div class="session-name">{{sessionName}}</div>
 
   <div class="flex layout horizontal end card-container" style="overflow: auto;">
-    <div *ngFor="let player of players" class="flex layout vertical player-card" [class.active-player]="player == currentPlayer">
+    <div *ngFor="let player of players"
+         class="flex layout vertical player-card"
+         [class.active-player]="player == currentPlayer && !gameOver"
+         [class.winner]="gameOver && (winner != null && player == winner)">
       <section class="layout horizontal center justified">
         <div>{{player.name}}</div>
         <div>{{player.score}}</div>
 
-        <material-fab [hidden]="player.myTurn == false"
+        <material-fab [hidden]="player.myTurn == false || gameOver"
                       mini
                       raised
                       (trigger)="submitScore()"
@@ -15,7 +18,7 @@
           <glyph icon="navigate_next"></glyph>
         </material-fab>
 
-        <material-fab [hidden]="player.myTurn == false"
+        <material-fab [hidden]="player.myTurn == false || gameOver"
                       mini
                       raised
                       (trigger)="bust()"
@@ -24,7 +27,7 @@
         </material-fab>
       </section>
 
-      <material-input *ngIf="player == currentPlayer"
+      <material-input *ngIf="player == currentPlayer && !gameOver"
                       type="number"
                       checkNonNegative
                       keypressUpdate
